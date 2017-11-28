@@ -2,59 +2,63 @@ package com.sun.o2o.dto;
 
 /**
  * 封装json对象，所有返回结果都使用它
- * @param <T>
  */
 public class Result<T> {
-    private boolean success;//是否成功标志
-    private T data;//成功时返回的数据
-    private String errorMsg;//错误信息
-    private int errorCode;
-    public Result(){
 
-    }
+	private boolean success;// 是否成功标志
 
-    //成功时的构造器
-    public Result(boolean success,T data){
-        this.success = success;
-        this.data = data;
-    }
+	private T data;// 成功时返回的数据
 
-    //错误时的构造器
-    public Result(boolean success,int errorCode,String errorMsg){
-        this.success = success;
-        this.errorMsg = errorMsg;
-        this.errorCode = errorCode;
-    }
+	private String errorMsg;// 错误信息
 
-    public boolean isSuccess() {
-        return success;
-    }
+	private int errorCode;
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
+	public Result() {
+	}
 
-    public T getData() {
-        return data;
-    }
+	// 成功时的构造器
+	public Result(boolean success, T data) {
+		this.success = success;
+		this.data = data;
+	}
 
-    public void setData(T data) {
-        this.data = data;
-    }
+	// 错误时的构造器
+	public Result(boolean success, int errorCode, String errorMsg) {
+		this.success = success;
+		this.errorMsg = errorMsg;
+		this.errorCode = errorCode;
+	}
 
-    public String getErrorMsg() {
-        return errorMsg;
-    }
+	public boolean isSuccess() {
+		return success;
+	}
 
-    public void setErrorMsg(String errorMsg) {
-        this.errorMsg = errorMsg;
-    }
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
 
-    public int getErrorCode() {
-        return errorCode;
-    }
+	public T getData() {
+		return data;
+	}
 
-    public void setErrorCode(int errorCode) {
-        this.errorCode = errorCode;
-    }
+	public void setData(T data) {
+		this.data = data;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
+
+	public int getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(int errorCode) {
+		this.errorCode = errorCode;
+	}
+
 }

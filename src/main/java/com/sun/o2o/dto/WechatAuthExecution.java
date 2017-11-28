@@ -1,9 +1,9 @@
 package com.sun.o2o.dto;
 
+import java.util.List;
+
 import com.sun.o2o.entity.WechatAuth;
 import com.sun.o2o.enums.WechatAuthStateEnum;
-
-import java.util.List;
 
 public class WechatAuthExecution {
 	// 结果状态

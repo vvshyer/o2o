@@ -1,5 +1,16 @@
 package com.sun.o2o.web.local;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.sun.o2o.dto.LocalAuthExecution;
 import com.sun.o2o.entity.LocalAuth;
 import com.sun.o2o.entity.PersonInfo;
@@ -8,15 +19,6 @@ import com.sun.o2o.exceptions.LocalAuthOperationException;
 import com.sun.o2o.service.LocalAuthService;
 import com.sun.o2o.util.CodeUtil;
 import com.sun.o2o.util.HttpServletRequestUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "local", method = { RequestMethod.GET, RequestMethod.POST })
@@ -24,15 +26,14 @@ public class LocalAuthController {
 	@Autowired
 	private LocalAuthService localAuthService;
 
-
+	@RequestMapping(value = "/bindlocalauth", method = RequestMethod.POST)
+	@ResponseBody
 	/**
 	 * 将用户信息与平台帐号绑定
 	 * 
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = "/bindlocalauth", method = RequestMethod.POST)
-	@ResponseBody
 	private Map<String, Object> bindLocalAuth(HttpServletRequest request) {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		// 验证码校验
@@ -69,15 +70,14 @@ public class LocalAuthController {
 		return modelMap;
 	}
 
-
+	@RequestMapping(value = "/changelocalpwd", method = RequestMethod.POST)
+	@ResponseBody
 	/**
 	 * 修改密码
 	 * 
 	 * @param request
 	 * @return
 	 */
-    @RequestMapping(value = "/changelocalpwd", method = RequestMethod.POST)
-    @ResponseBody
 	private Map<String, Object> changeLocalPwd(HttpServletRequest request) {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		// 验证码校验

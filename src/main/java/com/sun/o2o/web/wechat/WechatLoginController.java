@@ -64,6 +64,9 @@ public class WechatLoginController {
                 log.debug("weixin login user:" + user.toString());
                 request.getSession().setAttribute("openId", openId);
                 auth = wechatAuthService.getWechatAuthByOpenId(openId);
+                if (auth != null){
+                    request.getSession().setAttribute("user",auth.getPersonInfo());
+                }
             } catch (IOException e) {
                 log.error("error in getUserAccessToken or getUserInfo or findByOpenId: " + e.toString());
                 e.printStackTrace();

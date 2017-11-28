@@ -1,12 +1,12 @@
 package com.sun.o2o.exceptions;
 
-public class ShopOperationException extends RuntimeException{
+public class ShopOperationException extends RuntimeException {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2361446884822298905L;
 
-
-    private static final long serialVersionUID = 2754307818775642525L;
-
-    public ShopOperationException(String msg) {
-        super(msg);
-    }
+	public ShopOperationException(String msg) {
+		super(msg);
+	}
 }
-

@@ -32,12 +32,12 @@ public interface LocalAuthService {
 
 	/**
 	 * 修改平台帐号的登录密码
+	 * 
 	 * @param userId
 	 * @param username
 	 * @param password
 	 * @param newPassword
 	 * @return
-	 * @throws LocalAuthOperationException
 	 */
 	LocalAuthExecution modifyLocalAuth(Long userId, String username, String password, String newPassword)
 			throws LocalAuthOperationException;

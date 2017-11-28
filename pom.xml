@@ -49,11 +49,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>c3p0</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.1.2</version>
+            <version>5.1.37</version>
         </dependency>
         <!-- 图片处理 -->
         <!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
@@ -76,6 +72,7 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.zxing</groupId>

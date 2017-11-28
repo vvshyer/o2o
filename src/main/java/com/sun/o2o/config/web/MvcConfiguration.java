@@ -3,6 +3,7 @@ package com.sun.o2o.config.web;
 import com.google.code.kaptcha.servlet.KaptchaServlet;
 import com.sun.o2o.interceptor.shopadmin.ShopLoginInterceptor;
 import com.sun.o2o.interceptor.shopadmin.ShopPermissionInterceptor;
+import com.sun.o2o.interceptor.superadmin.SuperAdminLoginInterceptor;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -115,31 +116,51 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter implements Applica
         return servlet;
     }
 
-    @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        /** 店家管理系统拦截部分 **/
         String interceptPath = "/shopadmin/**";
-        //注册拦截器
+        // 注册拦截器
         InterceptorRegistration loginIR = registry.addInterceptor(new ShopLoginInterceptor());
-        //配置拦截的路径
+        // 配置拦截的路径
         loginIR.addPathPatterns(interceptPath);
-
+        /** shopauthmanagement page **/
         loginIR.excludePathPatterns("/shopadmin/addshopauthmap");
-        //还可以注册其它的拦截器
+        /** scan **/
+        loginIR.excludePathPatterns("/shopadmin/adduserproductmap");
+        loginIR.excludePathPatterns("/shopadmin/exchangeaward");
+        // 还可以注册其它的拦截器
         InterceptorRegistration permissionIR = registry.addInterceptor(new ShopPermissionInterceptor());
-        //配置拦截的路径
+        // 配置拦截的路径
         permissionIR.addPathPatterns(interceptPath);
-        //配置不拦截的路径
-        //shoplist page
+        // 配置不拦截的路径
+        /** shoplist page **/
         permissionIR.excludePathPatterns("/shopadmin/shoplist");
         permissionIR.excludePathPatterns("/shopadmin/getshoplist");
-        //shopregister page
+        /** shopregister page **/
         permissionIR.excludePathPatterns("/shopadmin/getshopinitinfo");
         permissionIR.excludePathPatterns("/shopadmin/registershop");
         permissionIR.excludePathPatterns("/shopadmin/shopoperation");
-        //shopmanage page
+        /** shopmanage page **/
         permissionIR.excludePathPatterns("/shopadmin/shopmanagement");
         permissionIR.excludePathPatterns("/shopadmin/getshopmanagementinfo");
-        //shopauthmanagement page
+        /** shopauthmanagement page **/
         permissionIR.excludePathPatterns("/shopadmin/addshopauthmap");
+        /** scan **/
+        permissionIR.excludePathPatterns("/shopadmin/adduserproductmap");
+        permissionIR.excludePathPatterns("/shopadmin/exchangeaward");
+        /** 超级管理员系统拦截部分 **/
+        interceptPath = "/superadmin/**";
+        // 注册拦截器
+        InterceptorRegistration superadminloginIR = registry.addInterceptor(new SuperAdminLoginInterceptor());
+        // 配置拦截的路径
+        superadminloginIR.addPathPatterns(interceptPath);
+        loginIR.excludePathPatterns("/superadmin/login");
+        loginIR.excludePathPatterns("/superadmin/logincheck");
+        loginIR.excludePathPatterns("/superadmin/main");
+        loginIR.excludePathPatterns("/superadmin/top");
+        loginIR.excludePathPatterns("/superadmin/clearcache4area");
+        loginIR.excludePathPatterns("/superadmin/clearcache4headline");
+        loginIR.excludePathPatterns("/superadmin/clearcache4shopcategory");
     }
+
 }

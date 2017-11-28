@@ -1,12 +1,13 @@
 package com.sun.o2o.exceptions;
 
-public class UserAwardMapOperationException extends RuntimeException{
+public class UserAwardMapOperationException extends RuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3022463597988213145L;
 
-    private static final long serialVersionUID = 5787499495870624505L;
-
-    public UserAwardMapOperationException(String msg) {
-        super(msg);
-    }
+	public UserAwardMapOperationException(String msg) {
+		super(msg);
+	}
 }
-

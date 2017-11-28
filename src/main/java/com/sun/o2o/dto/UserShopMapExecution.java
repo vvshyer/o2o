@@ -1,79 +1,87 @@
 package com.sun.o2o.dto;
 
-import com.sun.o2o.entity.UserProductMap;
-import com.sun.o2o.entity.UserShopMap;
-import com.sun.o2o.enums.UserProductMapStateEnum;
-
 import java.util.List;
 
+import com.sun.o2o.entity.UserShopMap;
+import com.sun.o2o.enums.UserShopMapStateEnum;
+
 public class UserShopMapExecution {
-    //结果状态
-    private int state;
+	// 结果状态
+	private int state;
 
-    //状态标识
-    private String stateInfo;
+	// 状态标识
+	private String stateInfo;
 
-    //授权数
-    private Integer count;
+	// 授权数
+	private Integer count;
 
-    //操作的userShopMap
-    private UserShopMap userShopMap;
+	// 操作的UserShopMap
+	private UserShopMap userShopMap;
 
-    //授权列表
-    private List<UserShopMap> userShopMapList;
+	// 授权列表（查询专用）
+	private List<UserShopMap> userShopMapList;
 
-    public UserShopMapExecution(){
+	public UserShopMapExecution() {
+	}
 
-    }
+	// 失败的构造器
+	public UserShopMapExecution(UserShopMapStateEnum stateEnum) {
+		this.state = stateEnum.getState();
+		this.stateInfo = stateEnum.getStateInfo();
+	}
 
-    public UserShopMapExecution(UserProductMapStateEnum stateEnum) {
-        this.state = stateEnum.getState();
-        this.stateInfo = stateEnum.getStateInfo();
-    }
+	// 成功的构造器
+	public UserShopMapExecution(UserShopMapStateEnum stateEnum, UserShopMap userShopMap) {
+		this.state = stateEnum.getState();
+		this.stateInfo = stateEnum.getStateInfo();
+		this.userShopMap = userShopMap;
+	}
 
-    public UserShopMapExecution(UserProductMapStateEnum stateEnum, UserShopMap userShopMap) {
-        this.state = stateEnum.getState();
-        this.stateInfo = stateEnum.getStateInfo();
-        this.userShopMap = userShopMap;
-    }
+	// 成功的构造器
+	public UserShopMapExecution(UserShopMapStateEnum stateEnum, List<UserShopMap> userShopMapList) {
+		this.state = stateEnum.getState();
+		this.stateInfo = stateEnum.getStateInfo();
+		this.userShopMapList = userShopMapList;
+	}
 
-    public int getState() {
-        return state;
-    }
+	public int getState() {
+		return state;
+	}
 
-    public void setState(int state) {
-        this.state = state;
-    }
+	public void setState(int state) {
+		this.state = state;
+	}
 
-    public String getStateInfo() {
-        return stateInfo;
-    }
+	public String getStateInfo() {
+		return stateInfo;
+	}
 
-    public void setStateInfo(String stateInfo) {
-        this.stateInfo = stateInfo;
-    }
+	public void setStateInfo(String stateInfo) {
+		this.stateInfo = stateInfo;
+	}
 
-    public Integer getCount() {
-        return count;
-    }
+	public Integer getCount() {
+		return count;
+	}
 
-    public void setCount(Integer count) {
-        this.count = count;
-    }
+	public void setCount(Integer count) {
+		this.count = count;
+	}
 
-    public UserShopMap getUserShopMap() {
-        return userShopMap;
-    }
+	public UserShopMap getUserShopMap() {
+		return userShopMap;
+	}
 
-    public void setUserShopMap(UserShopMap userShopMap) {
-        this.userShopMap = userShopMap;
-    }
+	public void setUserShopMap(UserShopMap userShopMap) {
+		this.userShopMap = userShopMap;
+	}
 
-    public List<UserShopMap> getUserShopMapList() {
-        return userShopMapList;
-    }
+	public List<UserShopMap> getUserShopMapList() {
+		return userShopMapList;
+	}
 
-    public void setUserShopMapList(List<UserShopMap> userShopMapList) {
-        this.userShopMapList = userShopMapList;
-    }
+	public void setUserShopMapList(List<UserShopMap> userShopMapList) {
+		this.userShopMapList = userShopMapList;
+	}
+
 }

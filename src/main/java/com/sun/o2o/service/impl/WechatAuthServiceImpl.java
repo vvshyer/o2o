@@ -1,5 +1,13 @@
 package com.sun.o2o.service.impl;
 
+import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.sun.o2o.dao.PersonInfoDao;
 import com.sun.o2o.dao.WechatAuthDao;
 import com.sun.o2o.dto.WechatAuthExecution;
@@ -8,13 +16,6 @@ import com.sun.o2o.entity.WechatAuth;
 import com.sun.o2o.enums.WechatAuthStateEnum;
 import com.sun.o2o.exceptions.WechatAuthOperationException;
 import com.sun.o2o.service.WechatAuthService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
 
 @Service
 public class WechatAuthServiceImpl implements WechatAuthService {

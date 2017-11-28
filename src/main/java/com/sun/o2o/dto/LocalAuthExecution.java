@@ -1,9 +1,9 @@
 package com.sun.o2o.dto;
 
+import java.util.List;
+
 import com.sun.o2o.entity.LocalAuth;
 import com.sun.o2o.enums.LocalAuthStateEnum;
-
-import java.util.List;
 
 public class LocalAuthExecution {
 	// 结果状态

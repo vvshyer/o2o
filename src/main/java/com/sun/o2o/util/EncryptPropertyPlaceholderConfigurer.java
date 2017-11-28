@@ -28,8 +28,8 @@ public class EncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderCon
 	 */
 	private boolean isEncryptProp(String propertyName) {
 		// 若等于需要加密的field，则进行加密
-		for (String encryptPropertyName : encryptPropNames) {
-			if (encryptPropertyName.equals(propertyName))
+		for (String encryptpropertyName : encryptPropNames) {
+			if (encryptpropertyName.equals(propertyName))
 				return true;
 		}
 		return false;

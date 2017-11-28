@@ -1,13 +1,11 @@
 package com.sun.o2o.config.redis;
 
-import com.sun.imageio.plugins.jpeg.JPEGImageWriter;
 import com.sun.o2o.cache.JedisPoolWriper;
 import com.sun.o2o.cache.JedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration

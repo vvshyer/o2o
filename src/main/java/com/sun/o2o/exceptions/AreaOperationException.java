@@ -1,11 +1,13 @@
 package com.sun.o2o.exceptions;
 
-public class AreaOperationException extends RuntimeException{
+public class AreaOperationException extends RuntimeException {
 
-    private static final long serialVersionUID = -2928444253570319740L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1512771573934050550L;
 
-    public AreaOperationException(String msg) {
-        super(msg);
-    }
-
+	public AreaOperationException(String msg) {
+		super(msg);
+	}
 }

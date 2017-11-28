@@ -1,22 +1,24 @@
 package com.sun.o2o.service.impl;
 
-import com.sun.o2o.cache.JedisUtil;
-import com.sun.o2o.service.CacheService;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
+import com.sun.o2o.cache.JedisUtil;
+import com.sun.o2o.service.CacheService;
 
 @Service
 public class CacheServiceImpl implements CacheService {
-    @Autowired
-    private JedisUtil.Keys jedisKeys;
+	@Autowired
+	private JedisUtil.Keys jedisKeys;
 
-    @Override
-    public void removeFromCache(String keyPrefix) {
-        Set<String> keySet = jedisKeys.keys(keyPrefix + "*");
-        for (String key : keySet) {
-            jedisKeys.del(key);
-        }
-    }
+	@Override
+	public void removeFromCache(String keyPrefix) {
+		Set<String> keySet = jedisKeys.keys(keyPrefix + "*");
+		for (String key : keySet) {
+			jedisKeys.del(key);
+		}
+	}
+
 }
