@@ -85,7 +85,7 @@ public class UserAwardMapDaoTest {
     @Test
     public void testQueryAllUserAwardMapList() throws Exception {
         UserAwardMap userAwardMap = new UserAwardMap();
-        List<UserAwardMap> userAwardMapList = userAwardMapDao.queryAllUserAwardMapList(userAwardMap, 0, 999);
+        List<UserAwardMap> userAwardMapList = userAwardMapDao.queryReceivedUserAwardMapList(userAwardMap, 0, 999);
         for (UserAwardMap u:userAwardMapList){
             System.out.println(u.getOperator().getName());
         }
