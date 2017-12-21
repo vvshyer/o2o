@@ -79,7 +79,8 @@ public class WechatLoginController {
             auth.setOpenId(openId);
             if (FRONTEND.equals(roleType)) {
                 personInfo.setUserType(1);
-            } else {
+            }
+            if (SHOPEND.equals(roleType)){
                 personInfo.setUserType(2);
             }
             auth.setPersonInfo(personInfo);
@@ -94,8 +95,10 @@ public class WechatLoginController {
         //若用户点击的是前端展示系统按钮则进入前端展示系统
         if (FRONTEND.equals(roleType)) {
             return "frontend/index";
-        } else {
+        }else if (SHOPEND.equals(roleType)){
             return "shop/shoplist";
+        }else {
+            return null;
         }
     }
 

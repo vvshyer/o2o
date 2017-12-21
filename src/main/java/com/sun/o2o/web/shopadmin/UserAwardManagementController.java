@@ -73,7 +73,7 @@ public class UserAwardManagementController {
 				userAwardMap.setAward(award);
 			}
 			// 分页返回结果
-			UserAwardMapExecution ue = userAwardMapService.listUserAwardMap(userAwardMap, pageIndex, pageSize);
+			UserAwardMapExecution ue = userAwardMapService.listReceivedUserAwardMap(userAwardMap, pageIndex, pageSize);
 			modelMap.put("userAwardMapList", ue.getUserAwardMapList());
 			modelMap.put("count", ue.getCount());
 			modelMap.put("success", true);

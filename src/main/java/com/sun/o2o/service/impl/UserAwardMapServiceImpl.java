@@ -47,6 +47,27 @@ public class UserAwardMapServiceImpl implements UserAwardMapService {
 	}
 
 	@Override
+	public UserAwardMapExecution listReceivedUserAwardMap(UserAwardMap userAwardCondition, Integer pageIndex, Integer pageSize) {
+		// 空值判断
+		if (userAwardCondition != null && pageIndex != null && pageSize != null) {
+			// 页转行
+			int beginIndex = PageCalculator.calculateRowIndex(pageIndex, pageSize);
+			// 根据查询条件分页返回用户与奖品的映射信息列表(用户领取奖品的信息列表)
+			List<UserAwardMap> userAwardMapList = userAwardMapDao.queryReceivedUserAwardMapList(userAwardCondition, beginIndex,
+					pageSize);
+			// 返回总数
+			int count = userAwardMapDao.queryUserAwardMapCount(userAwardCondition);
+			UserAwardMapExecution ue = new UserAwardMapExecution();
+			ue.setUserAwardMapList(userAwardMapList);
+			ue.setCount(count);
+			return ue;
+		} else {
+			return null;
+		}
+
+	}
+
+	@Override
 	public UserAwardMap getUserAwardMapById(long userAwardMapId) {
 		return userAwardMapDao.queryUserAwardMapById(userAwardMapId);
 	}

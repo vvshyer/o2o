@@ -7,7 +7,7 @@ import com.sun.o2o.exceptions.UserAwardMapOperationException;
 public interface UserAwardMapService {
 
 	/**
-	 * 根据传入的查询条件分页获取映射列表及总数
+	 * 根据传入的查询条件分页获取映射列表及总数(前台系统使用)
 	 * 
 	 * @param userAwardCondition
 	 * @param pageIndex
@@ -15,6 +15,16 @@ public interface UserAwardMapService {
 	 * @return
 	 */
 	UserAwardMapExecution listUserAwardMap(UserAwardMap userAwardCondition, Integer pageIndex, Integer pageSize);
+
+	/**
+	 * 根据传入的查询条件分页获取映射列表及总数(店家管理系统使用)
+	 *
+	 * @param userAwardCondition
+	 * @param pageIndex
+	 * @param pageSize
+	 * @return
+	 */
+	UserAwardMapExecution listReceivedUserAwardMap(UserAwardMap userAwardCondition, Integer pageIndex, Integer pageSize);
 
 	/**
 	 * 根据传入的Id获取映射信息
@@ -41,5 +51,6 @@ public interface UserAwardMapService {
 	 * @throws UserAwardMapOperationException
 	 */
 	UserAwardMapExecution modifyUserAwardMap(UserAwardMap userAwardMap) throws UserAwardMapOperationException;
+
 
 }

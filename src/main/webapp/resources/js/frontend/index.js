@@ -53,5 +53,4 @@ $(function() {
 		var newUrl = '/o2o/frontend/shoplist?parentId=' + shopCategoryId;
 		window.location.href = newUrl;
 	});
-
 });

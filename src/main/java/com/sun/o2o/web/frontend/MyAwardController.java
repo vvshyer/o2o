@@ -213,7 +213,8 @@ public class MyAwardController {
 			try {
 				// 将content的信息先进行base64编码以避免特殊字符造成的干扰，之后拼接目标URL
 				String longUrl = urlPrefix + exchangeUrl + urlMiddle + URLEncoder.encode(content, "UTF-8") + urlSuffix;
-				// 将目标URL转换成短的URL
+                System.out.println(longUrl);
+                // 将目标URL转换成短的URL
 				String shortUrl = ShortNetAddressUtil.getShortURL(longUrl);
 				// 调用二维码生成的工具类方法，传入短的URL，生成二维码
 				BitMatrix qRcodeImg = CodeUtil.generateQRCodeStream(shortUrl, response);

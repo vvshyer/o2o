@@ -4,13 +4,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -95,81 +89,81 @@ public class UserProductManagementController {
 	@RequestMapping(value = "/listproductselldailyinfobyshop", method = RequestMethod.GET)
 	@ResponseBody
 	private Map<String, Object> listProductSellDailyInfobyShop(HttpServletRequest request) throws ParseException {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		// 获取当前的店铺信息
+		Map<String,Object> modelMap = new HashMap<>();
+		//获取当前的店铺信息
 		Shop currentShop = (Shop) request.getSession().getAttribute("currentShop");
-		// 空值校验，主要确保shopId不为空
-		if ((currentShop != null) && (currentShop.getShopId() != null)) {
-			// 添加查询条件
+		//空值校验
+		if (currentShop != null && currentShop.getShopId()!= null){
+			//添加查询条件
 			ProductSellDaily productSellDailyCondition = new ProductSellDaily();
 			productSellDailyCondition.setShop(currentShop);
 			Calendar calendar = Calendar.getInstance();
-			// 获取昨天的日期
-			calendar.add(Calendar.DATE, -1);
+			//获取昨天的日期
+			calendar.add(Calendar.DATE,-1);
 			Date endTime = calendar.getTime();
-			// 获取七天前的日期
-			calendar.add(Calendar.DATE, -6);
+			//获取7天前的日期
+			calendar.add(Calendar.DATE,-6);
 			Date beginTime = calendar.getTime();
-			// 根据传入的查询条件获取该店铺的商品销售情况
+			//根据传入的查询条件获取该店铺的商品销售情况
 			List<ProductSellDaily> productSellDailyList = productSellDailyService
-					.listProductSellDaily(productSellDailyCondition, beginTime, endTime);
-			// 指定日期格式
+					.listProductSellDaily(productSellDailyCondition,beginTime,endTime);
+			//指定日期格式
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			// 商品名列表，保证唯一性
-			HashSet<String> legendData = new HashSet<String>();
-			// x轴数据
-			HashSet<String> xData = new HashSet<String>();
-			// 定义series
-			List<EchartSeries> series = new ArrayList<EchartSeries>();
-			// 日销量列表
-			List<Integer> totalList = new ArrayList<Integer>();
-			// 当前商品名，默认为空
+			//商品名列表，保证唯一性
+			LinkedHashSet<String> legendData = new LinkedHashSet<>();
+			//x轴数据
+			LinkedHashSet<String> xData = new LinkedHashSet<>();
+			//定义series
+			List<EchartSeries> series = new ArrayList<>();
+			//日销量列表
+			List<Integer> totalList = new ArrayList<>();
+			//当前商品名，默认为空
 			String currentProductName = "";
-			for (int i = 0; i < productSellDailyList.size(); i++) {
+			for (int i = 0; i < productSellDailyList.size(); i++){
 				ProductSellDaily productSellDaily = productSellDailyList.get(i);
-				// 自动去重
+				//自动去重
 				legendData.add(productSellDaily.getProduct().getProductName());
 				xData.add(sdf.format(productSellDaily.getCreateTime()));
-				if (!currentProductName.equals(productSellDaily.getProduct().getProductName())
-						&& !currentProductName.isEmpty()) {
-					// 如果currentProductName不等于获取的商品名，或者已遍历到列表的末尾，且currentProductName不为空，
-					// 则是遍历到下一个商品的日销量信息了, 将前一轮遍历的信息放入series当中，
-					// 包括了商品名以及与商品对应的统计日期以及当日销量
+				if (!currentProductName.equalsIgnoreCase(productSellDaily.getProduct().getProductName())
+						&& !currentProductName.isEmpty()){
+					//如果currentProductName不等于获取的商品名，或者已遍历到末尾，
+					//则遍历到下一个商品的日销量信息了，将前一轮遍历的信息放入series中
+					//包括了商品名以及与商品对应的统计日期以及当日销量
 					EchartSeries es = new EchartSeries();
 					es.setName(currentProductName);
-					es.setData(totalList.subList(0, totalList.size()));
+					es.setData(totalList.subList(0,totalList.size()));
 					series.add(es);
-					// 重置totalList
-					totalList = new ArrayList<Integer>();
-					// 变换下currentProductId为当前的productId
+					//重置totalList
+					totalList = new ArrayList<>();
+					//变换下currentProductId为当前的productId
 					currentProductName = productSellDaily.getProduct().getProductName();
-					// 继续添加新的值
+					//继续添加新的值
 					totalList.add(productSellDaily.getTotal());
-				} else {
-					// 如果还是当前的productId则继续添加新值
+				}else {
+					//如果还是当前的productId则继续添加新的值
 					totalList.add(productSellDaily.getTotal());
 					currentProductName = productSellDaily.getProduct().getProductName();
 				}
-				// 队列之末，需要将最后的一个商品销量信息也添加上
-				if (i == productSellDailyList.size() - 1) {
+				//队列末尾需要将最后一个商品销量信息添加上
+				if (i == productSellDailyList.size() - 1){
 					EchartSeries es = new EchartSeries();
 					es.setName(currentProductName);
-					es.setData(totalList.subList(0, totalList.size()));
+					es.setData(totalList.subList(0,totalList.size()));
 					series.add(es);
 				}
 			}
-			modelMap.put("series", series);
-			modelMap.put("legendData", legendData);
-			// 拼接出xAxis
-			List<EchartXAxis> xAxis = new ArrayList<EchartXAxis>();
+			modelMap.put("series",series);
+			modelMap.put("legendData",legendData);
+			//拼接处xAxis
+			List<EchartXAxis> xAxis = new ArrayList<>();
 			EchartXAxis exa = new EchartXAxis();
 			exa.setData(xData);
 			xAxis.add(exa);
-			modelMap.put("xAxis", xAxis);
-			modelMap.put("success", true);
-		} else {
-			modelMap.put("success", false);
-			modelMap.put("errMsg", "empty shopId");
+			modelMap.put("xAxis",xAxis);
+			modelMap.put("success",true);
+		}else {
+			modelMap.put("success",false);
+			modelMap.put("errMsg","empty shopId");
 		}
 		return modelMap;
 	}
@@ -222,7 +216,7 @@ public class UserProductManagementController {
 
 	/**
 	 * 根据code获取UserAccessToken，进而通过token里的openId获取微信用户信息
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -245,7 +239,7 @@ public class UserProductManagementController {
 
 	/**
 	 * 根据二维码携带的createTime判断其是否超过了10分钟，超过十分钟则认为过期
-	 * 
+	 *
 	 * @param wechatInfo
 	 * @return
 	 */
@@ -265,7 +259,7 @@ public class UserProductManagementController {
 
 	/**
 	 * 根据传入的customerId, productId以及操作员信息组建用户消费记录
-	 * 
+	 *
 	 * @param customerId
 	 * @param productId
 	 * @param operator
@@ -291,7 +285,7 @@ public class UserProductManagementController {
 
 	/**
 	 * 检查扫码的人员是否有操作权限
-	 * 
+	 *
 	 * @param userId
 	 * @param userProductMap
 	 * @return

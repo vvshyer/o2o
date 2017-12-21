@@ -9,14 +9,27 @@ import com.sun.o2o.entity.UserAwardMap;
 public interface UserAwardMapDao {
 	/**
 	 * 根据传入进来的查询条件分页返回用户兑换奖品记录的列表信息
-	 * 
+	 *
 	 * @param userAwardCondition
 	 * @param rowIndex
 	 * @param pageSize
 	 * @return
 	 */
 	List<UserAwardMap> queryUserAwardMapList(@Param("userAwardCondition") UserAwardMap userAwardCondition,
-                                             @Param("rowIndex") int rowIndex, @Param("pageSize") int pageSize);
+											 @Param("rowIndex") int rowIndex, @Param("pageSize") int pageSize);
+
+	/**
+	 * 根据传入进来的查询条件分页返回用户兑换奖品记录的列表信息
+	 *
+	 * @param userAwardCondition
+	 * @param rowIndex
+	 * @param pageSize
+	 * @return
+	 */
+	List<UserAwardMap> queryReceivedUserAwardMapList(@Param("userAwardCondition") UserAwardMap userAwardCondition,
+											 @Param("rowIndex") int rowIndex, @Param("pageSize") int pageSize);
+
+
 
 	/**
 	 * 配合queryUserAwardMapList返回相同查询条件下的兑换奖品记录数
